@@ -69,63 +69,58 @@ db.rooms.insertMany([
         startDate: "22-05-2021",
         endDate: "27-05-2021",
         customerId: customerId1
-      },
-      {
-        startDate: "29-05-2021",
-        endDate: "05-06-2021",
-        customerId: customerId1
-      },
-      {
-        startDate: "08-06-2021",
-        endDate: "15-06-2021",
-        customerId: customerId1
       }
     ]
   },
 ]);
 
-// db.createCollection("services");
-// db.services.insertMany([
-//   {
-//     name: "cleaning",
-//     price: 0,
-//   },
-//   {
-//     name: "bedsheet",
-//     price: 0,
-//   },
-//   {
-//     name: "towel",
-//     price: 0,
-//   },
-// ]);
+var room1 = db.rooms.findOne({ number: 101 });
+var roomId1 = room1._id;
+var room2 = db.rooms.findOne({ number: 102 });
+var roomId2 = room2._id;
 
-// var service1 = db.services.findOne({ name: "cleaning" });
-// var serviceId1 = service1._id;
-// var service2 = db.services.findOne({ name: "bedsheet" });
-// var serviceId2 = service2._id;
+db.createCollection("services");
+db.services.insertMany([
+  {
+    name: "cleaning",
+    price: 0,
+  },
+  {
+    name: "bedsheet",
+    price: 0,
+  },
+  {
+    name: "creche",
+    price: 20,
+  },
+]);
+
+var service1 = db.services.findOne({ name: "cleaning" });
+var serviceId1 = service1._id;
+var service2 = db.services.findOne({ name: "bedsheet" });
+var serviceId2 = service2._id;
 
 db.createCollection("staff");
 db.staff.insertMany([
   {
     name: "Alex",
-    status: 0,
+    status: "free",
   },
   {
     name: "Sam",
-    status: 0,
+    status: "assigned",
   },
   {
     name: "Tina",
-    status: 0,
+    status: "free",
   },
   {
     name: "Julian",
-    status: 0,
+    status: "free",
   },
   {
     name: "Kim",
-    status: 0,
+    status: "free",
   },
 ]);
 
@@ -137,6 +132,26 @@ var staff3 = db.staff.findOne({ name: "Julian" });
 var staffId3 = staff3._id;
 var staff4 = db.staff.findOne({ name: "Kim" });
 var staffId4 = staff4._id;
+
+
+db.createCollection("tasks");
+db.tasks.insertMany([
+  {
+    type: "luggage",
+    staff: staffId1,
+    customer: customerId1,   
+    status: "completed",
+    feedback: "abc"
+  },
+  {
+    type: "room service",
+    staff: staffId2,
+    customer: customerId2,  
+    status: "pending",
+    feedback: ""
+  }
+]);
+
 
 db.createCollection("food");
 db.food.insertMany([
@@ -254,18 +269,37 @@ db.activities.insertMany([
   {
     name: "cycling",
     price: "100",
+    guide: [staffId3],
+    type: ["outdoor", "family"],
+    description: "abc",
+    reviews: ["review1", "review2"],
+    bookings: {
+      date: "14-06-2021",
+      time:"15:00-18:00",
+      maxSize:10,
+      bookings: [customerId2]
+    }
   },
   {
-    name: "skiing",
+    name: "pottery",
     price: "200",
     guide: [staffId4],
-    bookings: [customerId1],
+    type: ["indoor", "couple"],
+    description: "xyz",
+    reviews: ["review1", "review2"],
+    bookings: {
+      date: "15-06-2021",
+      time:"09:00-12:00",
+      maxSize:5,
+      bookings: [customerId2]
+    }
+
   },
 ]);
 
 var activity1 = db.activities.findOne({ name: "cycling" });
 var activitiesId1 = activity1._id;
-var activity2 = db.activities.findOne({ name: "skiing" });
+var activity2 = db.activities.findOne({ name: "pottery" });
 var activityId2 = activity2._id;
 
 db.createCollection("regroupLocations");
@@ -333,4 +367,33 @@ db.placesOfInterest.insertMany([
     }
   },
 ]);
+
+db.createCollection("accessControl");
+db.accessControl.insertMany([
+  {
+    room: roomId1,
+    QRCode: "path/to/image",
+    pin: 1234
+  },
+  {
+    room: roomId2,
+    QRCode: "path/to/image",
+    pin:5678
+  }
+]);
+
+db.createCollection("roomChangeReasons");
+db.roomChangeReasons.insertOne(
+  {
+    reasons: ["reason1", "reason2", "reason3"]
+  }
+);
+
+db.createCollection("roomsForCleaning");
+db.roomsForCleaning.insertOne(
+  {
+    rooms: [roomId1, roomId2]
+  }
+);
+
 
