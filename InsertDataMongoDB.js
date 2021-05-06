@@ -27,37 +27,83 @@ db.rooms.insertMany([
     price: 800,
     category: "Deluxe",
     features: ["City View"],
-    bookedBy: customerId1,
+    occupant: customerId1,
+    status: "occupied",
+    bookings: [
+      {
+        startDate: "20-05-2021",
+        endDate: "25-05-2021",
+        customerId: customerId1
+      },
+      {
+        startDate: "27-05-2021",
+        endDate: "02-06-2021",
+        customerId: customerId2
+      }
+    ]
   },
   {
     number: 102,
     price: 600,
     category: "Premium",
     features: ["Ocean View"],
-    bookedBy: customerId2,
+    occupant: customerId2,
+    status: "occupied",
+    bookings: [
+      {
+        startDate: "22-05-2021",
+        endDate: "27-05-2021",
+        customerId: customerId1
+      }
+    ]
+  },
+  {
+    number: 103,
+    price: 600,
+    category: "Premium",
+    features: ["Ocean View"],
+    occupant: "",
+    status: "vacant",
+    bookings: [
+      {
+        startDate: "22-05-2021",
+        endDate: "27-05-2021",
+        customerId: customerId1
+      },
+      {
+        startDate: "29-05-2021",
+        endDate: "05-06-2021",
+        customerId: customerId1
+      },
+      {
+        startDate: "08-06-2021",
+        endDate: "15-06-2021",
+        customerId: customerId1
+      }
+    ]
   },
 ]);
 
-db.createCollection("services");
-db.services.insertMany([
-  {
-    name: "cleaning",
-    price: 0,
-  },
-  {
-    name: "bedsheet",
-    price: 0,
-  },
-  {
-    name: "towel",
-    price: 0,
-  },
-]);
+// db.createCollection("services");
+// db.services.insertMany([
+//   {
+//     name: "cleaning",
+//     price: 0,
+//   },
+//   {
+//     name: "bedsheet",
+//     price: 0,
+//   },
+//   {
+//     name: "towel",
+//     price: 0,
+//   },
+// ]);
 
-var service1 = db.services.findOne({ name: "cleaning" });
-var serviceId1 = service1._id;
-var service2 = db.services.findOne({ name: "bedsheet" });
-var serviceId2 = service2._id;
+// var service1 = db.services.findOne({ name: "cleaning" });
+// var serviceId1 = service1._id;
+// var service2 = db.services.findOne({ name: "bedsheet" });
+// var serviceId2 = service2._id;
 
 db.createCollection("staff");
 db.staff.insertMany([
@@ -222,8 +268,8 @@ var activitiesId1 = activity1._id;
 var activity2 = db.activities.findOne({ name: "skiing" });
 var activityId2 = activity2._id;
 
-db.createCollection("regroupLandmarks");
-db.regroupLandmarks.insertMany([
+db.createCollection("regroupLocations");
+db.regroupLocations.insertMany([
   {
     name: "Hallowed Church",
     activity: [activitiesId1],
@@ -238,8 +284,8 @@ db.regroupLandmarks.insertMany([
 var regroupLandmark1 = db.activities.findOne({ name: "Hallowed Church" });
 var regroupLandmarkID1 = regroupLandmark1;
 
-db.createCollection("location");
-db.location.insertMany([
+db.createCollection("currentLocation");
+db.currentLocation.insertMany([
   {
     person: customerId1,
     location:
@@ -257,3 +303,34 @@ db.location.insertMany([
     }
   },
 ]);
+
+db.createCollection("interests");
+db.interests.insertMany([
+  {
+    name: "shopping"
+  },
+  {
+    name: "photography"
+  }
+]);
+
+db.createCollection("placesOfInterest");
+db.placesOfInterest.insertMany([
+  {
+    name: "place1",
+    location:
+    {
+      lat: -72.7738706,
+      lng: 41.6332836
+    }
+  },
+  {
+    name: "place2",
+    location:
+    {
+      lat: 15.2222,
+      lng: 50.3333
+    }
+  },
+]);
+
