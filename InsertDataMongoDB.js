@@ -153,67 +153,48 @@ db.tasks.insertMany([
 ]);
 
 
-db.createCollection("food");
-db.food.insertMany([
-  {
-    name: "food1",
-    price: "50",
-  },
-  {
-    name: "food2",
-    price: "65",
-  },
-  {
-    name: "food3",
-    price: "40",
-  },
-]);
+db.createCollection("menu");
+db.menu.insertMany([
+    {
+        name: "food1",
+        price: "50",
+    },
+    {
+        name: "food2",
+        price: "65",
+    },
+    {
+        name: "drink1",
+        price: "15",
+    },
+    {
+        name: "drink2",
+        price: "20",
+    },
+    {
+        name: "dessert1",
+        price: "15",
+    },
+    {
+        name: "dessert2",
+        price: "10",
+    }
+]
+);
 
-var food1 = db.food.findOne({ name: "food1" });
+var food1 = db.menu.findOne({ name: "food1" });
 var foodId1 = food1._id;
-var food2 = db.food.findOne({ name: "food2" });
+var food2 = db.menu.findOne({ name: "food2" });
 var foodId2 = food2._id;
 
-db.createCollection("drinks");
-db.drinks.insertMany([
-  {
-    name: "drink1",
-    price: "15",
-  },
-  {
-    name: "drink2",
-    price: "20",
-  },
-  {
-    name: "drink3",
-    price: "25",
-  },
-]);
-
-var drink1 = db.drinks.findOne({ name: "drink1" });
+var drink1 = db.menu.findOne({ name: "drink1" });
 var drinkId1 = drink1._id;
-var drink2 = db.drinks.findOne({ name: "drink2" });
+var drink2 = db.menu.findOne({ name: "drink2" });
 var drinkId2 = drink2._id;
 
-db.createCollection("desserts");
-db.desserts.insertMany([
-  {
-    name: "dessert1",
-    price: "15",
-  },
-  {
-    name: "dessert2",
-    price: "10",
-  },
-  {
-    name: "dessert3",
-    price: "20",
-  },
-]);
-
-var dessert1 = db.desserts.findOne({ name: "dessert1" });
+var dessert1 = db.menu.findOne({ name: "dessert1" });
 var dessertId1 = dessert1._id;
-var dessert2 = db.desserts.findOne({ name: "dessert2" });
+var dessert2 = db.menu.findOne({ name: "dessert2" });
 var dessertId2 = dessert2._id;
 
 db.createCollection("serviceLocations");
