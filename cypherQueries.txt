@@ -1,0 +1,141 @@
+//Rooms
+
+CREATE (r1:Room {name: '101', price: 150.00, capacity: 4, cityView: true})
+CREATE (r2:Room {name: '102', price: 150.00, capacity: 4, cityView: true})
+CREATE (r3:Room {name: '103', price: 150.00, capacity: 4, cityView: true})
+CREATE (r4:Room {name: '104', price: 150.00, capacity: 4, cityView: true})
+CREATE (r5:Room {name: '105', price: 150.00, capacity: 4, cityView: true})
+CREATE (r6:Room {name: '201', price: 150.00, capacity: 4, cityView: true})
+CREATE (r7:Room {name: '202', price: 150.00, capacity: 4, cityView: true})
+CREATE (r8:Room {name: '203', price: 150.00, capacity: 4, cityView: true})
+CREATE (r9:Room {name: '204', price: 150.00, capacity: 4, cityView: true})
+CREATE (r10:Room {name: '205', price: 150.00, capacity: 4, cityView: true})
+
+CREATE (r11:Room {name: '301', price: 130.00, capacity: 4, cityView: false})
+CREATE (r12:Room {name: '302', price: 130.00, capacity: 4, cityView: false})
+CREATE (r13:Room {name: '303', price: 130.00, capacity: 4, cityView: false})
+CREATE (r14:Room {name: '304', price: 130.00, capacity: 4, cityView: false})
+CREATE (r15:Room {name: '305', price: 130.00, capacity: 4, cityView: false})
+
+CREATE (r16:Room {name: '106', price: 100.00, capacity: 2, cityView: true})
+CREATE (r17:Room {name: '107', price: 100.00, capacity: 2, cityView: true})
+CREATE (r18:Room {name: '108', price: 100.00, capacity: 2, cityView: true})
+
+CREATE (r19:Room {name: '206', price: 75.00, capacity: 2, cityView: false})
+CREATE (r20:Room {name: '207', price: 75.00, capacity: 2, cityView: false})
+
+
+// Customers
+  
+CREATE (c1:Customer {name: 'John Doe', noOfPeople: 4, duration: 5, start:'1 May 2021',end:'6 May 2021'})  
+CREATE (c2:Customer {name: 'Keshia Christo', noOfPeople: 4, duration: 3, start:'2 May 2021',end:'5 May 2021'})
+CREATE (c3:Customer {name: 'Pattee Young', noOfPeople: 4, duration: 5, start:'1 May 2021',end:'6 May 2021'})
+CREATE (c4:Customer {name: 'Delmy Gaulin', noOfPeople: 4, duration: 2, start:'4 May 2021',end:'6 May 2021'})
+CREATE (c5:Customer {name: 'Maryrose Takahashi', noOfPeople: 4, duration: 5, start:'10 May 2021',end:'15 May 2021'})
+CREATE (c6:Customer {name: 'Adrianna Blackstock Doe', noOfPeople: 4, duration: 5, start:'10 May 2021',end:'15 May 2021'})
+CREATE (c7:Customer {name: 'Hedy Pollak', noOfPeople: 4, duration: 2, start:'2 May 2021',end:'4 May 2021'})
+CREATE (c8:Customer {name: 'Neville Biehl', noOfPeople: 4, duration: 3, start:'2 May 2021',end:'5 May 2021'})
+CREATE (c9:Customer {name: 'Fernandez', noOfPeople: 4, duration: 4, start:'1 May 2021',end:'5 May 2021'})
+
+CREATE (c10:Customer {name: 'Shane Bond', noOfPeople: 3, duration: 2, start:'7 May 2021',end:'9 May 2021'})
+CREATE (c11:Customer {name: 'Jason lee', noOfPeople: 3, duration: 2, start:'4 May 2021',end:'6 May 2021'})
+CREATE (c12:Customer {name: 'Stefanos Shapovalov', noOfPeople: 3, duration: 2, start:'12 May 2021',end:'13 May 2021'})
+
+CREATE (c13:Customer {name: 'Peter Moeckel', noOfPeople: 2, duration: 4, start:'1 May 2021',end:'6 May 2021'})
+CREATE (c14:Customer {name: 'Virat Lakshman', noOfPeople: 2, duration: 5, start:'8 May 2021',end:'13 May 2021'})
+CREATE (c15:Customer {name: 'Sunny Carter', noOfPeople: 2, duration: 4, start:'1 May 2021',end:'6 May 2021'})
+
+CREATE (c16:Customer {name: 'Caroline Kenin', noOfPeople: 1, duration: 1, start:'2 May 2021',end:'3 May 2021'})
+CREATE (c17:Customer {name: 'Brian Johnson', noOfPeople: 2, duration: 5, start:'5 May 2021',end:'10 May 2021'})
+
+//Create staff
+
+CREATE (staff1:Staff {name: 'Alex', status: 'free'})
+CREATE (staff2:Staff {name: 'Sam', status: 'assigned'})
+CREATE (staff3:Staff {name: 'Tina', status: 'free'})
+CREATE (staff4:Staff {name: 'Julian', status: 'free'})
+
+
+
+//Room Bookings
+
+CREATE (r1)-[:OCCUPIED_BY]->(c7)
+CREATE (r2)-[:OCCUPIED_BY]->(c2)
+CREATE (r4)-[:OCCUPIED_BY]->(c3)
+CREATE (r16)-[:OCCUPIED_BY]->(c13)
+CREATE (r17)-[:OCCUPIED_BY]->(c15)
+CREATE (r18)-[:OCCUPIED_BY]->(c16)
+CREATE (r6)-[:OCCUPIED_BY]->(c1)
+CREATE (r9)-[:RESERVED_FOR]->(c14)
+CREATE (r11)-[:RESERVED_FOR]->(c4)
+CREATE (r12)-[:RESERVED_FOR]->(c17)
+CREATE (r13)-[:OCCUPIED_BY]->(c8)
+
+
+
+//Create Service
+CREATE (s1:Service {name: 'Food', price: 20})
+CREATE (s2:Service {name: 'Water', price: 5})
+CREATE (s3:Service {name: 'Linen', price: 0})
+CREATE (s4:Service {name: 'Creche', price: 0})
+CREATE (s5:Service {name: 'Room Clean', price: 0})
+CREATE (s6:Service {name: 'Linen', price: 0})
+CREATE (s7:Service {name: 'Wake Up Call', price: 0})
+CREATE (s8:Service {name: 'Food Delivery', price: 0})
+
+
+//Show Service purchase
+CREATE (c1)-[:PURCHASED]->(s1)<-[:ASSIGNED_TO]- (staff2)
+CREATE (c1)-[:PURCHASED]->(s3)
+CREATE (c1)-[:PURCHASED]->(s2)
+CREATE (c1)-[:PURCHASED]->(s4)
+CREATE (c2)-[:PURCHASED]->(s7)
+
+
+//Create Menu
+CREATE (menu1:Menu {name: 'Food1', price: 20})
+CREATE (menu2:Menu {name: 'Food2', price: 25})
+CREATE (menu3:Menu {name: 'Food3', price: 25})
+CREATE (menu4:Menu {name: 'Drink1', price: 10})
+CREATE (menu5:Menu {name: 'Drink2', price: 10})
+CREATE (menu6:Menu {name: 'Drink3', price: 10})
+
+//Create Service Locations
+CREATE (serviceLocation1:serviceLocation {name: 'Pool', price: 5})
+CREATE (serviceLocation2:serviceLocation {name: 'Lobby', price: 5})
+CREATE (serviceLocation3:serviceLocation {name: 'Room', price: 0})
+
+//Serve Food and Drinks
+CREATE (c1)-[:ORDERED]->(menu1)<-[:SERVED_AT]- (serviceLocation1)
+CREATE (c1)-[:ORDERED]->(menu4)<-[:SERVED_AT]- (serviceLocation1)
+CREATE (c2)-[:ORDERED]->(menu2)<-[:SERVED_AT]- (serviceLocation3)
+
+
+//Create activities
+
+CREATE (a1:Activity {name: 'Cycling', type: 'Outdoor', maxGroupSize:10, price: 50})
+CREATE (a2:Activity {name: 'Trekking', type: 'Outdoor', maxGroupSize:5, price: 65})
+CREATE (a3:Activity {name: 'Pottery Making', type: 'Indoor', maxGroupSize:8, price: 30})
+CREATE (a4:Activity {name: 'Monuments', type: 'Outdoor', maxGroupSize:10, price: 15})
+CREATE (a5:Activity {name: 'Wine Tasting', type: 'Outdoor', maxGroupSize:10, price: 40})
+CREATE (a6:Activity {name: 'Indoor Sports', type: 'Indoor', maxGroupSize:20, price: 5})
+CREATE (a7:Activity {name: 'Bird Watching', type: 'Outdoor', maxGroupSize:15, price: 10})
+CREATE (a8:Activity {name: 'Movie Night', type: 'Indoor', maxGroupSize:24, price: 8})
+
+//Show Activity Purchase
+
+CREATE (c1)-[:PURCHASED]->(a4)<-[:CONDUCTED_BY]- (staff3)
+CREATE (c1)-[:PURCHASED]->(a8)
+CREATE (c2)-[:PURCHASED]->(a1)<-[:CONDUCTED_BY]- (staff1)
+CREATE (c2)-[:PURCHASED]->(a7)
+CREATE (c13)-[:PURCHASED]->(a3)
+
+//Create Regroup Locations
+CREATE (regroup1:regroupLocation {name: 'Hallowed Church', location:'25.22,54.11'})
+CREATE (regroup2:regroupLocation {name: 'Forbidden Bridge', location:'28.22,54.88'})
+CREATE (regroup3:regroupLocation {name: 'Sweet Fountain', location:'27.55,54.11'})
+CREATE (regroup4:regroupLocation {name: 'Old Tree', location:'32.11,57.27'})
+
+//Select Regroup Locations
+CREATE (regroup1)-[:REGROUP_FOR]->(a1)
+CREATE (regroup4)-[:REGROUP_FOR]->(a2)
