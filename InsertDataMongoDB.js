@@ -214,6 +214,16 @@ db.staff.insertMany([
     type: "cleaning",
     status: "free",
   },
+  {
+    name: "Jojo",
+    type: "cleaning",
+    status: "free",
+  },
+  {
+    name: "Jin",
+    type: "cleaning",
+    status: "free",
+  },
 ]);
 
 var staff1 = db.staff.findOne({ name: "Alex" });
@@ -482,13 +492,34 @@ db.roomChangeReasons.insertOne({
   reasons: ["Not as per expectations", "Want a city view"],
 });
 
+/*
 db.createCollection("roomsForCleaning");
 db.roomsForCleaning.insertOne(
   {
     rooms: [roomId1, roomId2]
   }
 );
-
+*/
+db.createCollection("roomsForCleaning")
+db.roomsForCleaning.insertMany([
+        {
+             room: ObjectId("6096d8939471312f7d49864a") , 
+             timeslot_start: new Date(2019, 03, 29, 13, 12), 
+             timeslot_end: new Date(2019, 03, 29, 13, 14), 
+             status: "uncleaned" , 
+             roomNumber: 101 , 
+             staffAssigned: true
+        } , 
+        {
+             room: ObjectId("6096d8939471312f7d49864b"),
+             timeslot: "datetime" , 
+             status: "uncleaned" , 
+             timeslot_start: new Date(2019, 03, 29, 13, 12), 
+             timeslot_end: new Date(2019, 03, 29, 13, 14), 
+             roomNumber: 103 , 
+             staffAssigned: false 
+        }
+    ])
 db.createCollection("cleaningPlan");
 db.roomsForCleaning.insertMany([
   {
