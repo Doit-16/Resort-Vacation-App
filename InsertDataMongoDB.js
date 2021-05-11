@@ -191,22 +191,27 @@ db.createCollection("staff");
 db.staff.insertMany([
   {
     name: "Alex",
+    type: "chef",
     status: "free",
   },
   {
     name: "Sam",
+    type: "server",
     status: "assigned",
   },
   {
     name: "Tina",
+    type: "guide",
     status: "free",
   },
   {
     name: "Julian",
+    type: "manager",
     status: "free",
   },
   {
     name: "Kim",
+    type: "cleaning",
     status: "free",
   },
 ]);
@@ -241,44 +246,65 @@ db.tasks.insertMany([
 db.createCollection("menu");
 db.menu.insertMany([
   {
-    name: "food1",
-    price: "50",
+    item: "foodItem1",
+    description: "abc",
+    price: 50
   },
   {
-    name: "food2",
-    price: "65",
+    item: "foodItem2",
+    description: "xyz",
+    price: 65
   },
   {
-    name: "drink1",
-    price: "15",
+    item: "drinkItem1",
+    description: "abc",
+    price: 15
   },
   {
-    name: "drink2",
-    price: "20",
+    item: "drinkItem2",
+    description: "xyz",
+    price: 20
   },
-  {
-    name: "dessert1",
-    price: "15",
-  },
-  {
-    name: "dessert2",
-    price: "10",
-  },
-]);
 
-var food1 = db.menu.findOne({ name: "food1" });
+  {
+    item: "dessertItem1",
+    description: "abc",
+    price: 15
+  },
+  {
+    item: "dessertItem2",
+    description: "xyz",
+    price: 10
+  }
+]
+);
+
+db.createCollection("itemDetails");
+db.itemDetails.insertMany([
+  {
+    item: "foodItem1",
+    details: {
+      ingredients: ["ingredient1", "ingredient2"],
+      preparation: "Prepared using xyz",
+      nutrional_rating: 4
+    }
+  } 
+]
+);
+
+var food1 = db.menu.findOne({ item: "foodItem1" });
 var foodId1 = food1._id;
-var food2 = db.menu.findOne({ name: "food2" });
+var food2 = db.menu.findOne({ item: "foodItem2" });
 var foodId2 = food2._id;
 
-var drink1 = db.menu.findOne({ name: "drink1" });
+var drink1 = db.menu.findOne({ item: "drinkItem1" });
 var drinkId1 = drink1._id;
-var drink2 = db.menu.findOne({ name: "drink2" });
+var drink2 = db.menu.findOne({ item: "drinkItem2" });
 var drinkId2 = drink2._id;
 
-var dessert1 = db.menu.findOne({ name: "dessert1" });
+var dessert1 = db.menu.findOne({ item: "dessertItem1" });
 var dessertId1 = dessert1._id;
-var dessert2 = db.menu.findOne({ name: "dessert2" });
+var dessert2 = db.menu.findOne({ item: "dessertItem2" });
 var dessertId2 = dessert2._id;
 
 db.createCollection("serviceLocations");
@@ -304,9 +330,10 @@ var serviceLocationId2 = serviceLocation2._id;
 var serviceLocation3 = db.serviceLocations.findOne({ name: "room" });
 var serviceLocationId3 = serviceLocation3._id;
 
-db.createCollection("orderStatus");
-db.orderStatus.insertMany([
+db.createCollection("orders");
+db.orders.insertMany([
   {
+    _id: 1,
     customer: customerId2,
     assigned: staffId1,
     Items: [foodId1, drinkId2, dessertId2],
@@ -314,6 +341,7 @@ db.orderStatus.insertMany([
     status: "complete",
   },
   {
+    _id: 2,
     customer: customerId1,
     assigned: staffId2,
     Items: [foodId2, drinkId2, dessertId1],
@@ -323,11 +351,14 @@ db.orderStatus.insertMany([
 ]);
 
 db.createCollection("chatBot");
-db.chatBot.insertOne({
-  Question1: "Reply1",
-  Question2: "Reply2",
-  Question3: "Reply3",
-});
+db.chatBot.insertMany([
+  { "answer" : "Go to main menu and select services for placing an order"},
+  { "answer" : "Go to main menu and select activities for booking an activity"}
+//   { "_id" : 100, "sku" : "order123", "description" : "Single line description." },
+// { "_id" : 101, "sku" : "abc789", "description" : "First line\nSecond line" },
+// { "_id" : 102, "sku" : "xyz456", "description" : "Many spaces before     line" },
+// { "_id" : 103, "sku" : "xyz789", "description" : "Multiple\nline description" }
+]);
 
 db.createCollection("activities");
 db.activities.insertMany([
@@ -462,6 +493,56 @@ db.roomChangeReasons.insertOne({
 });
 
 db.createCollection("roomsForCleaning");
-db.roomsForCleaning.insertOne({
-  rooms: [roomId1, roomId2],
-});
+db.roomsForCleaning.insertOne(
+  {
+    rooms: [roomId1, roomId2]
+  }
+);
+
+db.createCollection("cleaningPlan");
+db.roomsForCleaning.insertMany([
+  {
+    staff: staffId1,
+    plan: {
+      room: roomId1,
+      time: 9
+    }
+  },
+  {
+    staff: staffId2,
+    plan: {
+      room: roomId2,
+      time: 10
+    }
+  }
+]
+);
+
+db.createCollection("serviceBookings");
+db.serviceBookings.insertMany([
+  {
+    customer: customerId2,
+    assigned: staffId1,
+    service: serviceId1,
+    status: "complete",
+  },
+  {
+    customer: customerId1,
+    assigned: staffId2,
+    Items: [foodId2, drinkId2, dessertId1],
+    serviceLocation: serviceLocationId1,
+    status: "pending",
+  },
+]);
+
+db.createCollection("billing");
+db.billing.insertMany([
+  {
+    customer: customerId1,
+    finalAmount: 500
+  },
+  {
+    customer: customerId2,
+    finalAmount: 800
+  },
+]);
