@@ -350,16 +350,6 @@ db.orders.insertMany([
   },
 ]);
 
-db.createCollection("chatBot");
-db.chatBot.insertMany([
-  { "answer" : "Go to main menu and select services for placing an order"},
-  { "answer" : "Go to main menu and select activities for booking an activity"}
-//   { "_id" : 100, "sku" : "order123", "description" : "Single line description." },
-// { "_id" : 101, "sku" : "abc789", "description" : "First line\nSecond line" },
-// { "_id" : 102, "sku" : "xyz456", "description" : "Many spaces before     line" },
-// { "_id" : 103, "sku" : "xyz789", "description" : "Multiple\nline description" }
-]);
-
 db.createCollection("activities");
 db.activities.insertMany([
   {
