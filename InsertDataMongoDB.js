@@ -213,16 +213,19 @@ db.staff.insertMany([
     name: "Kim",
     type: "cleaning",
     status: "free",
+    room: 0
   },
   {
     name: "Jojo",
     type: "cleaning",
     status: "free",
+    room: 0
   },
   {
     name: "Jin",
     type: "cleaning",
     status: "free",
+    room: 0
   },
 ]);
 
